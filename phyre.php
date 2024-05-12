@@ -54,24 +54,26 @@ function phyre_CreateAccount($params)
         }
     }
 
-    $request = [
+    $hostingPlanId = 0;
+    if (isset($params['configoption1'])) {
+        $hostingPlanId = $params['configoption1'];
+    }
+
+    $hostingSubscriptionRequestData = [
         'customer_id' => $phyreCustomerId,
-        'hosting_plan_id' => 1,
+        'hosting_plan_id' => $hostingPlanId,
         'domain' => $params['domain'],
     ];
-    dd($params);
 
-    $createHostingSubscription = $phyreApi->request('hosting-subscriptions', $request, 'POST');
-//    if (isset($createHostingSubscription['status']) && $createHostingSubscription['status'] == 'ok') {
-//        return true;
-//    }
+    $createHostingSubscription = $phyreApi->request('hosting-subscriptions', $hostingSubscriptionRequestData, 'POST');
+    if (isset($createHostingSubscription['status']) && $createHostingSubscription['status'] == 'ok') {
+        return "success";
+    }
+    if (isset($createHostingSubscription['error'])) {
+        return $createHostingSubscription['error'];
+    }
 
-    echo "<pre>";
-    var_dump($createHostingSubscription);
-    echo "</pre>";
-    die();
-
-    return "success";
+    return "error";
 }
 function phyre_GetUserCount(array $params)
 {
