@@ -21,7 +21,7 @@
   },
   "support": {
     "homepage": "https:\/\/www.phyre.com\/",
-    "support_url": "https:\/\/github.com\/phyre\/whmcs-plugin\/issues",
+    "support_url": "https:\/\/github.com\/PhyreApps\/PhyrePanelWHMCSPlugin",
     "docs_url": "https:\/\/docs.whmcs.com\/Phyre"
   },
   "authors": [
