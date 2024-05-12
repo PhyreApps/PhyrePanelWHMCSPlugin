@@ -1,0 +1,37 @@
+{
+  "schema": "1.0",
+  "type": "whmcs-servers",
+  "name": "phyre",
+  "license": "proprietary",
+  "category": "webhosting",
+  "description": {
+    "name": "Phyre",
+    "tagline": "Phyre web hosting control panel",
+    "long": "Phyre is a web hosting control panel that allows you to easily manage your web hosting account. It is designed to simplify the management and administration of websites and web applications.",
+    "features": [
+      "Automatic account provisioning and management",
+      "Automatic suspend and reactivation",
+      "Automated password resets and package upgrades",
+      "Automated SSL Installation and Deployment",
+      "Single Sign-On for customers"
+    ]
+  },
+  "logo": {
+    "filename": "logo.png"
+  },
+  "support": {
+    "homepage": "https:\/\/www.phyre.com\/",
+    "support_url": "https:\/\/github.com\/phyre\/whmcs-plugin\/issues",
+    "docs_url": "https:\/\/docs.whmcs.com\/Phyre"
+  },
+  "authors": [
+    {
+      "name": "WHMCS",
+      "homepage": "https:\/\/www.whmcs.com\/"
+    },
+    {
+      "name": "Phyre",
+      "homepage": "https:\/\/www.phyre.com\/"
+    }
+  ]
+}
