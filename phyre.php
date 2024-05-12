@@ -63,6 +63,8 @@ function phyre_CreateAccount($params)
         'customer_id' => $phyreCustomerId,
         'hosting_plan_id' => $hostingPlanId,
         'domain' => $params['domain'],
+        'system_username' => $params['username'],
+        'system_password' => $params['password'],
     ];
 
     $createHostingSubscription = $phyreApi->request('hosting-subscriptions', $hostingSubscriptionRequestData, 'POST');
