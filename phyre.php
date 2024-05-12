@@ -6,7 +6,6 @@ function phyre_MetaData()
 {
     return array("DisplayName" => "Phyre", "APIVersion" => "1.1", "ListAccountsUniqueIdentifierDisplayName" => "Domain", "ListAccountsUniqueIdentifierField" => "domain", "ListAccountsProductField" => "configoption1");
 }
-
 function phyre_TestConnection($params)
 {
     $phyreApi = new PhyreApi($params['serverip']);
@@ -177,7 +176,6 @@ function phyre_ChangePackage($params)
 {
     return "success";
 }
-
 function phyre_GetUserCount(array $params)
 {
     $totalCount = 111;
@@ -185,13 +183,11 @@ function phyre_GetUserCount(array $params)
 
     return array("success" => true, "totalAccounts" => $totalCount, "ownedAccounts" => $ownedAccounts);
 }
-
 function phyre_ConfigOptions(array $params)
 {
     $resellerSimpleMode = $params["producttype"] == "reselleraccount";
     return array("Phyre Hosting Plan" => array("Type" => "text", "Size" => "25", "Loader" => "phyre_ListHostingPlans", "SimpleMode" => true), "Max FTP Accounts" => array("Type" => "text", "Size" => "5"), "Web Space Quota" => array("Type" => "text", "Size" => "5", "Description" => "MB"), "Max Email Accounts" => array("Type" => "text", "Size" => "5"), "Bandwidth Limit" => array("Type" => "text", "Size" => "5", "Description" => "MB"), "Dedicated IP" => array("Type" => "yesno"), "Shell Access" => array("Type" => "yesno", "Description" => "Tick to grant access"), "Max SQL Databases" => array("Type" => "text", "Size" => "5"), "CGI Access" => array("Type" => "yesno", "Description" => "Tick to grant access"), "Max Subdomains" => array("Type" => "text", "Size" => "5"), "Frontpage Extensions" => array("Type" => "yesno", "Description" => "Tick to grant access"), "Max Parked Domains" => array("Type" => "text", "Size" => "5"), "Phyre Theme" => array("Type" => "text", "Size" => "15"), "Max Addon Domains" => array("Type" => "text", "Size" => "5"), "Limit Reseller by Number" => array("Type" => "text", "Size" => "5", "Description" => "Enter max number of allowed accounts"), "Limit Reseller by Usage" => array("Type" => "yesno", "Description" => "Tick to limit by resource usage"), "Reseller Disk Space" => array("Type" => "text", "Size" => "7", "Description" => "MB", "SimpleMode" => $resellerSimpleMode), "Reseller Bandwidth" => array("Type" => "text", "Size" => "7", "Description" => "MB", "SimpleMode" => $resellerSimpleMode), "Allow DS Overselling" => array("Type" => "yesno", "Description" => "MB"), "Allow BW Overselling" => array("Type" => "yesno", "Description" => "MB"), "Reseller ACL List" => array("Type" => "text", "Size" => "20", "SimpleMode" => $resellerSimpleMode), "Add Prefix to Package" => array("Type" => "yesno", "Description" => "Add username_ to package name"), "Configure Nameservers" => array("Type" => "yesno", "Description" => "Setup Custom ns1/ns2 Nameservers"), "Reseller Ownership" => array("Type" => "yesno", "Description" => "Set the reseller to own their own account"));
 }
-
 function phyre_ListHostingPlans(array $params, $removeUsername = true)
 {
 
@@ -209,4 +205,8 @@ function phyre_ListHostingPlans(array $params, $removeUsername = true)
     }
 
     return [];
+}
+function phyre_ClientArea($params)
+{
+    return array("overrideDisplayTitle" => ucfirst($params["domain"]), "tabOverviewReplacementTemplate" => "overview.tpl", "tabOverviewModuleOutputTemplate" => "loginbuttons.tpl");
 }
