@@ -1,4 +1,5 @@
 <?php
+
 include_once __DIR__ . '/src/PhyreApi.php';
 
 function phyre_MetaData()
@@ -79,7 +80,30 @@ function phyre_CreateAccount($params)
 }
 function phyre_TerminateAccount($params)
 {
-    return "success";
+    try {
+        $phyreApi = new PhyreApi($params['serverip']);
+        $phyreApi->setCredentials($params["serverusername"], $params["serverpassword"]);
+
+        $hostingSubscriptionId = null;
+        $getHostingSubscriptions = $phyreApi->request('hosting-subscriptions',[]);
+        if (isset($getHostingSubscriptions['data']['hostingSubscriptions'])) {
+            foreach ($getHostingSubscriptions['data']['hostingSubscriptions'] as $hostingSubscription) {
+                if ($hostingSubscription['domain'] == $params['domain']) {
+                    $hostingSubscriptionId = $hostingSubscription['id'];
+                }
+            }
+        }
+
+        $deleteHostingSubscriptions = $phyreApi->request('hosting-subscriptions/'.$hostingSubscriptionId,[], 'DELETE');
+        if ($deleteHostingSubscriptions) {
+            return "success";
+        }
+
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+
+    return "error";
 }
 function phyre_ChangePassword($params)
 {
