@@ -1,4 +1,5 @@
 <?php
+
 # Phyre Module
 
 $_LANG['Phyre']['packageDomain'] = "Package/Domain";
@@ -47,4 +48,5 @@ $_LANG['Phyre']['usageStatsDiskOverLimit'] = "You have exceeded your disk space 
 $_LANG['phyrelogin'] = "Login to Phyre";
 $_LANG['phyrewhmlogin'] = "Login to WHM";
 $_LANG['phyrewebmaillogin'] = "Login to Webmail";
+
 

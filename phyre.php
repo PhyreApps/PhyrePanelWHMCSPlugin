@@ -2,6 +2,24 @@
 
 include_once __DIR__ . '/src/PhyreApi.php';
 
+include __DIR__ . '/../../../lang/english.php';
+
+if (!isset($_LANG['Phyre'])) {
+
+    $phyreLangContent = file_get_contents(__DIR__ . '/lang/english.php');
+    $phyreLangContent = str_replace('<?php', '', $phyreLangContent);
+
+    $oldLangFileContent = file_get_contents(__DIR__ . '/../../../lang/english.php');
+
+    $newLangFileContent = $oldLangFileContent . "\n\n" . $phyreLangContent;
+
+    // backup original lang file
+    file_put_contents(__DIR__ . '/../../../lang/english.php.bak', $oldLangFileContent);
+    file_put_contents(__DIR__ . '/../../../lang/english.php', $newLangFileContent);
+
+}
+
+
 function phyre_MetaData()
 {
     return array("DisplayName" => "Phyre", "APIVersion" => "1.1", "ListAccountsUniqueIdentifierDisplayName" => "Domain", "ListAccountsUniqueIdentifierField" => "domain", "ListAccountsProductField" => "configoption1");
