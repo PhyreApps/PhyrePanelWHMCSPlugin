@@ -24,4 +24,3 @@ function phyre_defineSsoSidebarLinks($sidebar)
     $sidebar->getChild("Service Details Actions")->addChild("Login to Webmail", array("uri" => $webmailUrl, "label" => Lang::trans("phyrewebmaillogin"), "attributes" => array("target" => "_blank"), "disabled" => $service->status != "Active", "order" => 3));
 }
 
-?>

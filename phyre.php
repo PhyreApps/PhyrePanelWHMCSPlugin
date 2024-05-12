@@ -1,6 +1,7 @@
 <?php
 
 include_once __DIR__ . '/src/PhyreApi.php';
+include __DIR__ . '/hooks.php';
 
 include __DIR__ . '/../../../lang/english.php';
 
@@ -227,4 +228,10 @@ function phyre_ListHostingPlans(array $params, $removeUsername = true)
 function phyre_ClientArea($params)
 {
     return array("overrideDisplayTitle" => ucfirst($params["domain"]), "tabOverviewReplacementTemplate" => "overview.tpl", "tabOverviewModuleOutputTemplate" => "loginbuttons.tpl");
+}
+
+function phyre_ServiceSingleSignOn(array $params) {
+
+    
+
 }
