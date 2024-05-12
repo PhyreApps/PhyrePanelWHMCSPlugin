@@ -110,15 +110,68 @@ function phyre_TerminateAccount($params)
 }
 function phyre_ChangePassword($params)
 {
-    return "success";
+    return "error";
 }
 function phyre_SuspendAccount($params)
 {
-    return "success";
+
+    try {
+        $phyreApi = new PhyreApi($params['serverip']);
+        $phyreApi->setCredentials($params["serverusername"], $params["serverpassword"]);
+
+        $hostingSubscriptionId = null;
+        $getHostingSubscriptions = $phyreApi->request('hosting-subscriptions',[]);
+        if (isset($getHostingSubscriptions['data']['hostingSubscriptions'])) {
+            foreach ($getHostingSubscriptions['data']['hostingSubscriptions'] as $hostingSubscription) {
+                if ($hostingSubscription['domain'] == $params['domain']) {
+                    $hostingSubscriptionId = $hostingSubscription['id'];
+                }
+            }
+        }
+        if (!$hostingSubscriptionId) {
+            return "Hosting subscription not found";
+        }
+
+        $deleteHostingSubscriptions = $phyreApi->request('hosting-subscriptions/'.$hostingSubscriptionId.'/suspend',[], 'POST');
+        if ($deleteHostingSubscriptions) {
+            return "success";
+        }
+
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+
+    return "error";
 }
 function phyre_UnsuspendAccount($params)
 {
-    return "success";
+    try {
+        $phyreApi = new PhyreApi($params['serverip']);
+        $phyreApi->setCredentials($params["serverusername"], $params["serverpassword"]);
+
+        $hostingSubscriptionId = null;
+        $getHostingSubscriptions = $phyreApi->request('hosting-subscriptions',[]);
+        if (isset($getHostingSubscriptions['data']['hostingSubscriptions'])) {
+            foreach ($getHostingSubscriptions['data']['hostingSubscriptions'] as $hostingSubscription) {
+                if ($hostingSubscription['domain'] == $params['domain']) {
+                    $hostingSubscriptionId = $hostingSubscription['id'];
+                }
+            }
+        }
+        if (!$hostingSubscriptionId) {
+            return "Hosting subscription not found";
+        }
+
+        $deleteHostingSubscriptions = $phyreApi->request('hosting-subscriptions/'.$hostingSubscriptionId.'/unsuspend',[], 'POST');
+        if ($deleteHostingSubscriptions) {
+            return "success";
+        }
+
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+
+    return "error";
 }
 function phyre_ChangePackage($params)
 {
