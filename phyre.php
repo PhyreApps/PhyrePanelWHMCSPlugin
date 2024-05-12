@@ -69,8 +69,8 @@ function phyre_CreateAccount($params)
     if (isset($createHostingSubscription['status']) && $createHostingSubscription['status'] == 'ok') {
         return "success";
     }
-    if (isset($createHostingSubscription['error'])) {
-        return $createHostingSubscription['error'];
+    if (isset($createHostingSubscription['status']) && $createHostingSubscription['status'] == 'error') {
+        return $createHostingSubscription['message'];
     }
 
     return "error";
