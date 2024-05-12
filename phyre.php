@@ -93,6 +93,9 @@ function phyre_TerminateAccount($params)
                 }
             }
         }
+        if (!$hostingSubscriptionId) {
+            return "Hosting subscription not found";
+        }
 
         $deleteHostingSubscriptions = $phyreApi->request('hosting-subscriptions/'.$hostingSubscriptionId,[], 'DELETE');
         if ($deleteHostingSubscriptions) {
