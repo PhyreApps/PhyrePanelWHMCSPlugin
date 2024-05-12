@@ -77,6 +77,27 @@ function phyre_CreateAccount($params)
 
     return "error";
 }
+function phyre_TerminateAccount($params)
+{
+    return "success";
+}
+function phyre_ChangePassword($params)
+{
+    return "success";
+}
+function phyre_SuspendAccount($params)
+{
+    return "success";
+}
+function phyre_UnsuspendAccount($params)
+{
+    return "success";
+}
+function phyre_ChangePackage($params)
+{
+    return "success";
+}
+
 function phyre_GetUserCount(array $params)
 {
     $totalCount = 111;
