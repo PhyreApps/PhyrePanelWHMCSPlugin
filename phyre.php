@@ -232,6 +232,32 @@ function phyre_ClientArea($params)
 
 function phyre_ServiceSingleSignOn(array $params) {
 
-    
+    $phyreApi = new PhyreApi($params['serverip']);
+    $phyreApi->setCredentials($params["serverusername"], $params["serverpassword"]);
+
+    $customerId = null;
+    $hostingSubscriptionId = null;
+    $getHostingSubscriptions = $phyreApi->request('hosting-subscriptions',[]);
+    if (isset($getHostingSubscriptions['data']['hostingSubscriptions'])) {
+        foreach ($getHostingSubscriptions['data']['hostingSubscriptions'] as $hostingSubscription) {
+            if ($hostingSubscription['domain'] == $params['domain']) {
+                $hostingSubscriptionId = $hostingSubscription['id'];
+                $customerId = $hostingSubscription['customer_id'];
+            }
+        }
+    }
+    if (!$customerId) {
+        return "Customer not found";
+    }
+    if (!$hostingSubscriptionId) {
+        return "Hosting subscription not found";
+    }
+
+    $hostingSubscriptionId = null;
+    $generateLoginTokenRequest = $phyreApi->request('customers/'.$customerId.'/generate-login-token',[]);
+    if (isset($generateLoginTokenRequest['data']['token'])) {
+        header('Location: http://' . $params['serverip'].':8443/customers/'.$customerId.'/login-with-token?token='.$generateLoginTokenRequest['data']['token']);
+        return;
+    }
 
 }
