@@ -1,7 +1,7 @@
 <?php
 
 include_once __DIR__ . '/src/PhyreApi.php';
-include __DIR__ . '/hooks.php';
+//include __DIR__ . '/hooks.php';
 
 include __DIR__ . '/../../../lang/english.php';
 
